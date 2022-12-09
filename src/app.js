@@ -1,7 +1,11 @@
-import express from "express"
+import "express-async-errors";
+import express from "express";
+import { globalError } from "./Errors/errors";
+import { routeUser } from "./Routes/categories.routes";
 
-const app = express()
+const app = express();
+app.use(express.json());
+app.use("", routeUser);
+app.use(globalError);
 
-app.use(express.json())
-
-export default app
+export default app;
