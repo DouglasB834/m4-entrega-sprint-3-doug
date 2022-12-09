@@ -2,10 +2,8 @@ import database from "../database";
 import { cresteCategoriesSchema } from "../Serializs/Categories.schema";
 
 export const registerCategoriesService = async (data) => {
-  try {
     const validatedbody = await cresteCategoriesSchema.validate(data,{
-        stripUnknown: true,
-        //nao enviar campo a mais 
+        stripUnknown: true, 
         abortEarly:false
     });
     const queryRes = await database.query(
@@ -21,7 +19,4 @@ export const registerCategoriesService = async (data) => {
   
     return [201, queryRes.rows[0]];
 
-  } catch (error) {
-    return [400, { message: error.errors }];
-  }
 };

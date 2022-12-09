@@ -1,21 +1,18 @@
-import database from "../database"
+import database from "../database";
 
-export const deleteProductService = async (id)=>{
-    
-    try {
-        const queryRes = await database.query(
-            `
-            DELETE FROM 
-                products 
-            WHERE id = $1
-            ;             
-            `,
-            [id]
-        )
-        return [204,{}]
-    } catch (error) {
-        return [400, { message: error.errors }];
-    }
-
-
-}
+export const deleteProductService = async (id) => {
+  const queryRes = await database.query(
+    `
+    DELETE FROM 
+        products 
+    WHERE id = $1
+    RETURNING*
+    ;             
+    `,
+    [id]
+  );
+  if (!queryRes.rows[0]) {
+    return [400, { message: error.message }];
+  }
+  return [204, {}];
+};

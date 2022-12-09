@@ -10,24 +10,25 @@ import { registerCategoriesController } from "../Controller/registerCategories.C
 import { registerProductsController } from "../Controller/registerProducts.Controller.js";
 import { UpdateCategoryController } from "../Controller/UpdateCategory.Controller";
 import { updateProductIdController } from "../Controller/updateProductId.Controller";
+import { validatedIDMiddleware, validatedUuidMiddleware } from "../middleware/validatedID.Middleware";
 import { productsValidatedMiddleware } from "../middleware/validateProduct";
 import { verificationNameMiddleware } from "../middleware/verificationNameMiddleware";
 import { productsSchema, updateSchema } from "../Serializs/Products.Schema";
 
 export const routeUser = Router();
-
+//categories
 routeUser.get("/categories", listCategoriesController);
-routeUser.get("/categories/:id", getCategoryIdController);
-routeUser.patch("/categories/:id", UpdateCategoryController);
+routeUser.get("/categories/:id",validatedIDMiddleware, getCategoryIdController);
+routeUser.patch("/categories/:id", validatedIDMiddleware,UpdateCategoryController);
 routeUser.post("/categories", verificationNameMiddleware, registerCategoriesController);
-routeUser.delete("/categories/:id", deleteCategoryController);
+routeUser.delete("/categories/:id", validatedIDMiddleware,deleteCategoryController);
 
 //products
 routeUser.get("/products", listProductsController);
 routeUser.post("/products",productsValidatedMiddleware(productsSchema) ,registerProductsController);
-routeUser.patch("/products/:id",productsValidatedMiddleware(updateSchema) ,updateProductIdController);
-routeUser.get("/products/:id", getProductIdController);
+routeUser.patch("/products/:id",validatedUuidMiddleware,productsValidatedMiddleware(updateSchema) ,updateProductIdController);
+routeUser.get("/products/:id", validatedUuidMiddleware, getProductIdController);
 routeUser.get("/products/category/:id", getProdutcIDCategoryController);
 
 
-routeUser.delete("/products/:id", deleteProductController);
+routeUser.delete("/products/:id",validatedUuidMiddleware, deleteProductController);

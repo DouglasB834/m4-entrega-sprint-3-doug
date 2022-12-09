@@ -8,3 +8,8 @@ export const productsSchema = yup.object().shape({
 export const updateSchema = yup.object().shape({
   name: yup.string().min(3).required(),
 });
+
+// export const productsUuidShape = yup.object().shape({
+//   id: yup.string().uuid()
+// });
+

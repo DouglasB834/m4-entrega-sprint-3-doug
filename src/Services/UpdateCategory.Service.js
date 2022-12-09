@@ -2,12 +2,10 @@ import database from "../database";
 import { UpdateCategorySchema } from "../Serializs/Categories.schema";
 
 export const UpdateCategoryService = async (data, id) => {
-  try {
     const validatedbody = await UpdateCategorySchema.validate(data, {
       stripUnknown: true,
       abortEarly: false,
     });
-    console.log(validatedbody.name, id)
     const queryRes = await database.query(
     `
     UPDATE  
@@ -20,9 +18,12 @@ export const UpdateCategoryService = async (data, id) => {
     `,
       [validatedbody.name, id]
     );
+
+    if(!queryRes.rows[0]){
+      throw new msgError("categoria inexistente",400);
+
+    }
   
     return [200, queryRes.rows[0]];
-  } catch (error) {
-    return [400, {message: error.error}];
-  }
+
 };
