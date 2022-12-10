@@ -1,5 +1,4 @@
 
-
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS categories(
@@ -12,5 +11,6 @@ CREATE TABLE IF NOT EXISTS products(
 	name VARCHAR(200) NOT NULL,
 	price DECIMAL(9,2) NOT NULL,
 	category_id integer,
-	FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE  CASCADE
+	FOREIGN KEY (category_id) REFERENCES categories(id) 
+	ON DELETE SET NULL
 );

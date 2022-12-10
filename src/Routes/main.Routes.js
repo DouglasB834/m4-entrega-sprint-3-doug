@@ -11,8 +11,8 @@ import { registerProductsController } from "../Controller/registerProducts.Contr
 import { UpdateCategoryController } from "../Controller/UpdateCategory.Controller";
 import { updateProductIdController } from "../Controller/updateProductId.Controller";
 import { validatedIDMiddleware, validatedUuidMiddleware } from "../middleware/validatedID.Middleware";
-import { productsValidatedMiddleware } from "../middleware/validateProduct";
-import { verificationNameMiddleware } from "../middleware/verificationNameMiddleware";
+import { productsValidatedMiddleware } from "../middleware/validateProduct.Middlware";
+import { verificationNameMiddleware } from "../middleware/verificationName.Middleware";
 import { productsSchema, updateSchema } from "../Serializs/Products.Schema";
 
 export const routeUser = Router();

@@ -1,4 +1,4 @@
-import { deleteCategoryService } from "../Services/deleteCategory.Serve";
+import { deleteCategoryService } from "../Services/deleteCategory.Service";
 
 export const deleteCategoryController = async (req, res) => {
   const { id } = req.params;

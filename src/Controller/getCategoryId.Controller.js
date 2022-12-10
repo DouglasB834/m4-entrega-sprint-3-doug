@@ -1,4 +1,4 @@
-import { getCategoryIdService } from "../Services/getCategoryIdService";
+import { getCategoryIdService } from "../Services/getCategoryId.Service";
 
 export const getCategoryIdController = async (request, res) => {
   const { id } = request.params;
