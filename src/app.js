@@ -1,7 +1,7 @@
 import "express-async-errors";
 import express from "express";
 import { globalError } from "./Errors/errors";
-import { routeUser } from "./Routes/categories.routes";
+import { routeUser } from "./Routes/main.Routes";
 
 const app = express();
 app.use(express.json());

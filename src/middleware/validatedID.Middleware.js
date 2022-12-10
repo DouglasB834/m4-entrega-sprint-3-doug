@@ -13,7 +13,8 @@ export const validatedUuidMiddleware = async (req, res, next) => {
   
   if (!regexExp.test(id)) {
       throw new msgError("invalid input, id must be a valid uuid", 404)
-    }    
+    }
+    
   return next();
 
 };
