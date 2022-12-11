@@ -1,3 +1,4 @@
+import database from "../database";
 import { msgError } from "../Errors/errors";
 
 export const validatedIDMiddleware = (req, res, next) => {
@@ -9,12 +10,23 @@ export const validatedIDMiddleware = (req, res, next) => {
 // gostaria de ver outra forma de fazer
 export const validatedUuidMiddleware = async (req, res, next) => {
   const { id } = req.params;
-  const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;    
-  
-  if (!regexExp.test(id)) {
-      throw new msgError("invalid input, id must be a valid uuid", 404)
-    }
+  try {
+  const  queryRes = await database.query(
+  `
+  SELECT 
+      * 
+  FROM 
+      Products WHERE id = $1;
+  `, [id]
+  )
+   
+  if(queryRes.rowCount <=0){
+    throw new msgError("invalid input, id must be a valid uuid", 404)
+  }
     
+  } catch (error) {
+    throw new msgError("invalid input, id must be a valid uuid", 404)
+  }
   return next();
 
 };

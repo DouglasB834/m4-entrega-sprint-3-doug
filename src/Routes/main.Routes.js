@@ -28,7 +28,7 @@ routeUser.get("/products", listProductsController);
 routeUser.post("/products",productsValidatedMiddleware(productsSchema) ,registerProductsController);
 routeUser.patch("/products/:id",validatedUuidMiddleware,productsValidatedMiddleware(updateSchema) ,updateProductIdController);
 routeUser.get("/products/:id", validatedUuidMiddleware, getProductIdController);
-routeUser.get("/products/category/:id", getProdutcIDCategoryController);
+routeUser.get("/products/category/:id",validatedIDMiddleware,getProdutcIDCategoryController);
 
 
 routeUser.delete("/products/:id",validatedUuidMiddleware, deleteProductController);
